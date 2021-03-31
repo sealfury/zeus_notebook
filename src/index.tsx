@@ -28,9 +28,11 @@ const App = () => {
       bundle: true,
       write: false,
       plugins: [unpkgPathPlugin()],
+      define: {
+        'process.env.NODE_ENV': '"production"',
+        global: 'window', // done automatically by webpack but needed here
+      },
     })
-
-    // console.log(result)
 
     setCode(result.outputFiles[0].text)
   }
