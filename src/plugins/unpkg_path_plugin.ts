@@ -1,6 +1,7 @@
 import axios from 'axios'
 import * as esbuild from 'esbuild-wasm'
 import localForage from 'localforage'
+import { SemanticDiagnosticsBuilderProgram } from 'typescript'
 
 const fileCache = localForage.createInstance({
   name: 'filecache',
@@ -46,7 +47,7 @@ export const unpkgPathPlugin = () => {
         }
 
         // Check if file has been fetched & is in cache
-        const cachedResult = await fileCache.getItem(args.path)
+        const cachedResult = await fileCache.getItem<esbuild.OnLoadResult>(args.path)
 
         // If so, return immediately
         if (cachedResult) {
@@ -55,7 +56,7 @@ export const unpkgPathPlugin = () => {
 
         const { data, request } = await axios.get(args.path)
         
-        const result = {
+        const result: esbuild.OnLoadResult = {
           loader: 'jsx',
           contents: data,
           resolveDir: new URL('./', request.responseURL).pathname,
