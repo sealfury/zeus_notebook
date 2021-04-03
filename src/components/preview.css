@@ -9,6 +9,14 @@
   width: 100%;
 }
 
+.preview-error {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: red;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
 .react-draggable-transparent-selection .preview-wrapper:after {
   content: '';
   position: absolute;
