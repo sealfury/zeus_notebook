@@ -22,6 +22,8 @@ const bundleCode = async (rawCode: string) => {
         'process.env.NODE_ENV': '"production"',
         global: 'window', // done automatically by webpack but needed here
       },
+      jsxFactory: '_React.createElement',
+      jsxFragment: '_React.Fragment',
     })
 
     return {
